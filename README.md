@@ -13,13 +13,22 @@ It requires `libpcre3-dev` or `libpcre++-dev` to be installed on the system.
 ## usage
 
 ```go
-import "github.com/meinside/geektoken"
+package main
 
-text := "나는 우리나라가 세계에서 가장 아름다운 나라가 되기를 원한다. 가장 부강한 나라가 되기를 원하지 않는다."
+import (
+    "log"
 
-tokenizer, _ := geektoken.GetTokenizerWithModel(geektoken.ModelGPT35Turbo)
-if encoded, err := tokenizer.Encode(text); err == nil {
-    log.Printf("encoded token: %+v, token count = %d", encoded, len(encoded))
+    "github.com/meinside/geektoken"
+)
+
+func main() {
+    //text := "Hellow, world!"
+    text := "나는 우리나라가 세계에서 가장 아름다운 나라가 되기를 원한다. 가장 부강한 나라가 되기를 원하지 않는다."
+
+    tokenizer, _ := geektoken.GetTokenizerWithModel(geektoken.ModelGPT35Turbo)
+    if encoded, err := tokenizer.Encode(text, nil, nil); err == nil {
+        log.Printf("encoded token: %+v, token count = %d", encoded, len(encoded))
+    }
 }
 ```
 
