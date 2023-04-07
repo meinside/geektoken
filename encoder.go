@@ -12,8 +12,7 @@ import (
 type EncoderType map[string]int
 
 func (e *EncoderType) tryGetValue(key []byte) (result int, exists bool) {
-	k := string(key)
-	result, exists = (*e)[k]
+	result, exists = (*e)[string(key)]
 	return result, exists
 }
 
@@ -48,10 +47,8 @@ func newBPECore(bytePairEncoder EncoderType, specialTokenEncoder EncoderType, to
 	}
 
 	_decoder := DecoderType{}
-	if bytePairEncoder != nil {
-		for k, v := range bytePairEncoder {
-			_decoder[v] = k
-		}
+	for k, v := range bytePairEncoder {
+		_decoder[v] = k
 	}
 
 	var _specialTokenEncoder EncoderType
@@ -377,10 +374,8 @@ func (e *Tokenizer) Encode(lineToEncode string, allowedSpecial []string, disallo
 	}
 
 	allowed := map[string]bool{}
-	if allowedSpecial != nil {
-		for _, v := range allowedSpecial {
-			allowed[v] = true
-		}
+	for _, v := range allowedSpecial {
+		allowed[v] = true
 	}
 
 	disallowed := map[string]bool{}
@@ -401,9 +396,7 @@ func (e *Tokenizer) Encode(lineToEncode string, allowedSpecial []string, disallo
 
 		// except allowed ones
 		for k := range allowed {
-			if _, exists := disallowed[k]; exists {
-				delete(disallowed, k)
-			}
+			delete(disallowed, k)
 		}
 	}
 
