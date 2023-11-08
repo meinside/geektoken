@@ -105,7 +105,7 @@ func (c *BPECore) encodeNative(text string, allowedSpecial map[string]bool) (res
 		}
 		textSegment := text[startIndex:endIndex]
 
-		matcher := c.RegexTls.MatcherString(textSegment, 0)
+		matcher := c.RegexTls.NewMatcherString(textSegment, 0)
 		if matcher.Matches {
 			for _, match := range matcher.ExtractString() {
 				encodedPiece := []byte(match)
